@@ -29,4 +29,11 @@ public class UserService {
 		return userDao.getUser(no);
 	}
 	
+	public int updateUser(UserVo userVo) {
+		
+		
+		return userDao.updateUser(userVo);
+		
+	}
+	
 }
