@@ -32,8 +32,8 @@ public class BoardController {
 		
 		System.out.println(no);
 		System.out.println("read");
-		 BoardVo boardRead = bService.read(no);
-		 model.addAttribute("boardRead", boardRead);
+		BoardVo boardRead = bService.read(no);
+		model.addAttribute("boardRead", boardRead);
 		
 		return "board/read";
 	}

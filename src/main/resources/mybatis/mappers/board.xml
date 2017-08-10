@@ -22,10 +22,11 @@
 	
 	<select id = "getBoardOne" parameterType = "int" resultMap = "resultMapList">
 		<![CDATA[
-			select title, content, user_no, no
+			select title, content, user_no, no, 
 			from board
 			where no = #{no}
 		]]>
+		
 	</select>
 	
 	<insert id = "insert" parameterType = "com.mysite.vo.BoardVo">
