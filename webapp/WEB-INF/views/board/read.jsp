@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>mysite</title>
+<title>mysite4</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -35,9 +35,9 @@
 				</table>
 				
 				<div class="bottom">
-					<a href="/mysite/board">글목록</a>
-				<c:if test = "${authUser.no == boardRead.user_no}">
-					<a href="/mysite/board?a=modifyform&no=${boardRead.no }">글수정</a>
+					<a href="${pageContext.request.contextPath}/board/list">글목록</a>
+				<c:if test = "${authUser.no == boardRead.userNo}">
+					<a href="${pageContext.request.contextPath}/board/modifyform?no=${boardRead.no }">글수정</a>
 				</c:if>
 				</div>
 			</div>

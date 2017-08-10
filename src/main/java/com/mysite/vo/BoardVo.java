@@ -3,8 +3,8 @@ package com.mysite.vo;
 public class BoardVo {
 
 	private int no;
-	private int user_no;
-	private int hit_number;
+	private int userNo;
+	private int hitNumber;
 	private String name;
 	private String date;
 	private String content;
@@ -14,15 +14,15 @@ public BoardVo() {
 		
 	}
 
-	public BoardVo(int user_no, String title, String content) {
+	public BoardVo(int userNo, String title, String content) {
 		
 	}
 	
-	public BoardVo(int no, int user_no, int hit_number, String name, String date, String content, String title) {
+	public BoardVo(int no, int userNo, int hitNumber, String name, String date, String content, String title) {
 		super();
 		this.no = no;
-		this.user_no = user_no;
-		this.hit_number = hit_number;
+		this.userNo = userNo;
+		this.hitNumber = hitNumber;
 		this.name = name;
 		this.date = date;
 		this.content = content;
@@ -37,20 +37,20 @@ public BoardVo() {
 		this.no = no;
 	}
 
-	public int getUser_no() {
-		return user_no;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
+	public void setUserNo(int user_no) {
+		this.userNo = user_no;
 	}
 
-	public int getHit_number() {
-		return hit_number;
+	public int getHitNumber() {
+		return hitNumber;
 	}
 
-	public void setHit_number(int hit_number) {
-		this.hit_number = hit_number;
+	public void setHitNumber(int hit_number) {
+		this.hitNumber = hit_number;
 	}
 
 	public String getName() {
@@ -87,7 +87,7 @@ public BoardVo() {
 
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", user_no=" + user_no + ", hit_number=" + hit_number + ", name=" + name
+		return "BoardVo [no=" + no + ", user_no=" + userNo + ", hit_number=" + hitNumber + ", name=" + name
 				+ ", date=" + date + ", content=" + content + ", title=" + title + "]";
 	}
 	

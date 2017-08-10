@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="guestbook">
+<mapper namespace="board">
 
+	<resultMap id="resultMapList" type="com.mysite.vo.BoardVo">
+	 <result column = "no" property = "no"/>
+	 <result column = "user_no" property = "userNo"/>
+	 <result column = "hit" property = "hitNumber"/>
+	 <result column = "rag_date" property = "date"/>
+	 <result column = "name" property = "name"/>
+	 <result column = "content" property = "content"/>
+	 <result column = "title" property = "title"/>
+	</resultMap>
+	
+	<select id = "getBoardList" resultMap= "resultMapList">
+	 <![CDATA[
+	 	select b.no, title, user_no, hit, rag_date, u.name
+		from  board b, USERS u
+		where b.user_no = u.NO
+	 ]]>
+	</select>
+	
+	<select id = "getBoardOne" parameterType = "int" resultMap = "resultMapList">
+		<![CDATA[
+			select title, content, user_no
+			from board
+			where no = #{no}
+		]]>
+	</select>
 
 
 

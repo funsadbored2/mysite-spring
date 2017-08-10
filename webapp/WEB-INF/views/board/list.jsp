@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>mysite</title>
+<title>mysite4</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -32,17 +32,17 @@
 					<c:forEach items = "${boardList }" var ="vo">
 						<tr>
 							<td>${vo.no}</td>
-							<td><a href="/mysite/board?a=read&no=${vo.no}">${vo.title }</a></td>
+							<td><a href="${pageContext.request.contextPath }/board/read?no=${vo.no}">${vo.title }</a></td>
 							<td>${vo.name }</td>
-							<td>${vo.hit_number }</td>
+							<td>${vo.hitNumber }</td>
 							<td>${vo.date }</td>
 							<c:choose>
 			 					<c:when test = "${authUser == null}">
 			 						<td>로그인 필요</td>
 			 					</c:when>
 			 					<c:otherwise>
-			 					<c:if test ="${authUser.no == vo.user_no }">
-									<td><a href="/mysite/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
+			 					<c:if test ="${authUser.no == vo.userNo }">
+									<td><a href="${pageContext.request.contextPath }/board/delete?no=${vo.no }" class="del">삭제</a></td>
 								</c:if>
 								</c:otherwise>
 							</c:choose>
@@ -69,7 +69,7 @@
 						
 				<div class="bottom">
 				<c:if test = "${authUser != null}">
-					<a href="/mysite/board?a=insertform" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board?a=insertform" id="new-book">글쓰기</a>
 				</c:if>
 				</div>				
 			</div>
