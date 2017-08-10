@@ -26,4 +26,27 @@ public class BoardDao {
 		return sqlSession.selectOne("board.getBoardOne", no);
 	}
 
+	public int insert(BoardVo insertVo) {
+		System.out.println("board");
+		System.out.println(insertVo);
+		return sqlSession.insert("board.insert",insertVo);
+	}
+
+	public BoardVo modifyRead(int no) {
+		System.out.println("board");
+		System.out.println(no);
+		return sqlSession.selectOne("board.modifyRead", no);
+	}
+
+	public int modify(BoardVo modifyVo) {
+		System.out.println("board");
+		System.out.println(modifyVo.toString());
+		return sqlSession.update("board.modify", modifyVo);
+	}
+
+	public int delete(int no) {
+		System.out.println("board");
+		System.out.println(no);
+		return sqlSession.delete("board.delete", no);
+	}
 }

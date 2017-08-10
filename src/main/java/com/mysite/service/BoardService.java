@@ -26,5 +26,28 @@ public class BoardService {
 		return bDao.read(no);
 	}
 	
+	public int insert(BoardVo insertVo) {
+		System.out.println("service");
+		System.out.println(insertVo);
+		return bDao.insert(insertVo);
+	}
+	
+	public BoardVo modifyRead(int no) {
+		System.out.println("service");
+		System.out.println(no);
+		return bDao.modifyRead(no);
+	}
+
+	public int modify(BoardVo modifyVo) {
+		System.out.println("service");
+		System.out.println(modifyVo.toString());
+		return bDao.modify(modifyVo);
+	}
+
+	public int delete(int no) {
+		System.out.println("service");
+		System.out.println(no);
+		return bDao.delete(no);
+	}
 
 }

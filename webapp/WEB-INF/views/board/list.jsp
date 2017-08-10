@@ -42,7 +42,7 @@
 			 					</c:when>
 			 					<c:otherwise>
 			 					<c:if test ="${authUser.no == vo.userNo }">
-									<td><a href="${pageContext.request.contextPath }/board/delete?no=${vo.no }" class="del">삭제</a></td>
+									<td><a href="${pageContext.request.contextPath }/board/delete?no=${vo.no}" class="del">삭제</a></td>
 								</c:if>
 								</c:otherwise>
 							</c:choose>
@@ -69,7 +69,7 @@
 						
 				<div class="bottom">
 				<c:if test = "${authUser != null}">
-					<a href="${pageContext.request.contextPath }/board?a=insertform" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board/insertform?no=${authUser.no}" id="new-book">글쓰기</a>
 				</c:if>
 				</div>				
 			</div>

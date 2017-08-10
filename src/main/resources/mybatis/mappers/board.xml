@@ -22,12 +22,48 @@
 	
 	<select id = "getBoardOne" parameterType = "int" resultMap = "resultMapList">
 		<![CDATA[
-			select title, content, user_no
+			select title, content, user_no, no
 			from board
 			where no = #{no}
 		]]>
 	</select>
+	
+	<insert id = "insert" parameterType = "com.mysite.vo.BoardVo">
+		<![CDATA[
+			insert into board
+			values(seq_board_no.nextval, 
+			#{title},
+			#{content},
+			0,
+			sysdate,
+			#{userNo})
+		]]>
+	</insert>
 
+	<select id = "modifyRead" parameterType = "int" resultMap = "resultMapList">
+		<![CDATA[
+			select title, content, no, user_no
+			from board
+			where no = #{no}
+		]]>
+	</select>
+	
+	<update id="modify" parameterType = "com.mysite.vo.BoardVo">
+		<![CDATA[
+			update board 
+			set title =#{title},
+			content = #{content}
+			where NO = #{no}
+		]]>
+	
+	</update>
+	
+	<delete id = "delete" parameterType = "int">
+		<![CDATA[
+			DELETE FROM BOARD
+			WHERE NO = #{no}
+		]]>
+	</delete>
 
 
 </mapper>

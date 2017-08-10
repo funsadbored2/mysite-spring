@@ -38,6 +38,59 @@ public class BoardController {
 		return "board/read";
 	}
 	
+	@RequestMapping(value = "insertform")
+	public String insertform(int no){
+		
+		System.out.println("insertform");
+		
+		return "board/writeform";
+	}
+	
+	@RequestMapping(value = "insert")
+	public String insert(BoardVo insertVo){
+		
+		System.out.println("insert");
+		
+		bService.insert(insertVo);
+		
+		return "redirect:/board/list";
+	}
+
+	@RequestMapping(value = "modifyform")
+	public String modifyform(int no, Model model){
+		
+		System.out.println("modifyform");
+		System.out.println(no);
+		BoardVo modifyRead = bService.modifyRead(no);
+		
+		model.addAttribute("modifyRead", modifyRead);
+		
+		return "board/modifyform";
+	}
+
+	@RequestMapping(value = "modify")
+	public String modify(BoardVo modifyVo, Model model){
+		
+		System.out.println("modifyform");
+		System.out.println(modifyVo);
+		bService.modify(modifyVo);
+			
+		return "redirect:/board/list";
+	}
+
+	@RequestMapping(value = "delete")
+	public String delete(int no){
+		
+		System.out.println("delete");
+		System.out.println(no);
+		bService.delete(no);
+		
+		return "redirect:/board/list";
+	}
+	
+	
+	
+	
 	
 
 }
