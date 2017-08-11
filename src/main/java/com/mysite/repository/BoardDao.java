@@ -58,4 +58,6 @@ public class BoardDao {
 		System.out.println(no);
 		return sqlSession.delete("board.delete", no);
 	}
+	
+	
 }

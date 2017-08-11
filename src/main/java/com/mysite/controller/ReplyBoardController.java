@@ -7,23 +7,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mysite.service.BoardService;
-import com.mysite.vo.BoardVo;
+import com.mysite.service.ReplyBoardService;
+import com.mysite.vo.ReplyBoardVo;
 
 
-@RequestMapping(value = "board/")
+@RequestMapping(value = "replyboard/")
 @Controller
-public class BoardController {
-	
+public class ReplyBoardController {
+
 	@Autowired
-	private BoardService bService;
+	private ReplyBoardService bService;
 	
 	@RequestMapping(value = "list")
 	public String list(Model model){
 		
-		List<BoardVo> list = bService.getBoardList();
+		List<ReplyBoardVo> list = bService.getBoardList();
+		System.out.println(list);
 		model.addAttribute("boardList", list);
-		return "board/list";
+		
+		return "replyboard/list";
 	}
 	
 	@RequestMapping(value = "read")
@@ -31,10 +33,11 @@ public class BoardController {
 		
 		System.out.println(no);
 		System.out.println("read");
-		BoardVo boardRead = bService.read(no);
+		ReplyBoardVo boardRead = bService.read(no);
+		System.out.println(boardRead.toString());
 		model.addAttribute("boardRead", boardRead);
 		
-		return "board/read";
+		return "replyboard/replyRead";
 	}
 	
 	@RequestMapping(value = "insertform")
@@ -42,19 +45,40 @@ public class BoardController {
 		
 		System.out.println("insertform");
 		
-		return "board/writeform";
+		return "replyboard/writeform";
 	}
 	
 	@RequestMapping(value = "insert")
-	public String insert(BoardVo insertVo, Model model){
+	public String insert(ReplyBoardVo insertVo){
 		
 		System.out.println("insert");
 		
 		bService.insert(insertVo);
 		
-		model.addAttribute("boardRead", insertVo);
 		
-		return "redirect:/board/read";
+		return "redirect:/replyboard/list";
+	}
+	
+	@RequestMapping(value = "replyform")
+	public String replyform(int no, Model model){
+		
+		System.out.println("replyform");
+		model.addAttribute("replyVo", bService.read(no));
+		
+		return "replyboard/replyWrite";
+	}
+	
+	@RequestMapping(value = "reply")
+	public String reply(ReplyBoardVo replyVo,Model model){
+		
+		System.out.println("reply");
+		System.out.println(replyVo.getNo());
+		
+		bService.reply(replyVo);
+		
+		model.addAttribute("boardRead", replyVo);
+		
+		return "redirect:/replyboard/list";
 	}
 
 	@RequestMapping(value = "modifyform")
@@ -62,21 +86,21 @@ public class BoardController {
 		
 		System.out.println("modifyform");
 		System.out.println(no);
-		BoardVo modifyRead = bService.modifyRead(no);
+		ReplyBoardVo modifyRead = bService.modifyRead(no);
 		
 		model.addAttribute("modifyRead", modifyRead);
 		
-		return "board/modifyform";
+		return "replyboard/modifyform";
 	}
 
 	@RequestMapping(value = "modify")
-	public String modify(BoardVo modifyVo, Model model){
+	public String modify(ReplyBoardVo modifyVo, Model model){
 		
 		System.out.println("modifyform");
 		System.out.println(modifyVo);
 		bService.modify(modifyVo);
 			
-		return "redirect:/board/list";
+		return "redirect:/replyboard/list";
 	}
 
 	@RequestMapping(value = "delete")
@@ -86,6 +110,7 @@ public class BoardController {
 		System.out.println(no);
 		bService.delete(no);
 		
-		return "redirect:/board/list";
+		return "redirect:/replyboard/list";
 	}
+	
 }

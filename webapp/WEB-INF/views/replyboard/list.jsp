@@ -5,7 +5,7 @@
 <head>
 <title>mysite4</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="${pageContext.request.contextPath }/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -16,7 +16,7 @@
 		
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath}/board/search" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath}/replyboard/search" method="post">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -32,7 +32,8 @@
 					<c:forEach items = "${boardList }" var ="vo">
 						<tr>
 							<td>${vo.no}</td>
-							<td><a href="${pageContext.request.contextPath}/board/read?no=${vo.no}">${vo.title }</a></td>
+							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}">${vo.title }	</a></td>
+			
 							<td>${vo.name }</td>
 							<td>${vo.hitNumber }</td>
 							<td>${vo.date }</td>
@@ -42,7 +43,7 @@
 			 					</c:when>
 			 					<c:otherwise>
 			 					<c:if test ="${authUser.no == vo.userNo}">
-									<td><a href="${pageContext.request.contextPath}/board/delete?no=${vo.no}" class="del">삭제</a></td>
+									<td><a href="${pageContext.request.contextPath}/replyboard/delete?no=${vo.no}" class="del">삭제</a></td>
 								</c:if>
 								</c:otherwise>
 							</c:choose>
@@ -50,23 +51,23 @@
 					</c:forEach>
 				</table>
 				   
-				<div class="pager">
+				<%-- <div class="pager">
 					<ul>
 						<c:if test = "${paging.prev }">
-						<li><a href="${pageContext.request.contextPath }/board/list?page=${paging.start - 1 }">◀</a></li>
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${paging.start - 1 }">◀</a></li>
 						</c:if>
 						<c:forEach begin = "${paging.start }" end = "${paging.end }" var="index">
-						<li><a href="${pageContext.request.contextPath }/board/list?page=${index}">${index}</a></li>
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${index}">${index}</a></li>
 						</c:forEach>
 						<c:if test = "${paging.next }">
-						<li><a href="${pageContext.request.contextPath }/board/list?page=${paging.end + 1}">▶</a></li>
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${paging.end + 1}">▶</a></li>
 						</c:if>
 					</ul>
-				</div>		
+				</div>		 --%>
 						
 				<div class="bottom">
 				<c:if test = "${authUser != null}">
-					<a href="${pageContext.request.contextPath }/board/insertform?no=${authUser.no}" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/replyboard/insertform?no=${authUser.no}" id="new-book">글쓰기</a>
 				</c:if>
 				</div>				
 			</div>

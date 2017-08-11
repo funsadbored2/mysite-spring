@@ -35,10 +35,10 @@
 				</table>
 				
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath}/board/list">글목록</a>
-					<a href="${pageContext.request.contextPath}/board/replyWriteform?no=${boardRead.no }">답글쓰기</a>
+					<a href="${pageContext.request.contextPath}/replyboard/list">글목록</a>
 				<c:if test = "${authUser.no == boardRead.userNo}">
-					<a href="${pageContext.request.contextPath}/board/modifyform?no=${boardRead.no }">글수정</a>
+					<a href="${pageContext.request.contextPath}/replyboard/replyform?no=${boardRead.no }">답글쓰기</a>
+					<a href="${pageContext.request.contextPath}/replyboard/modifyform?no=${boardRead.no }">글수정</a>
 				</c:if>
 				</div>
 			</div>

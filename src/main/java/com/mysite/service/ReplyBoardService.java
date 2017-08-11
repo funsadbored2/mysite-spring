@@ -5,44 +5,51 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysite.repository.BoardDao;
-import com.mysite.vo.BoardVo;
+import com.mysite.repository.ReplyBoardDao;
+import com.mysite.vo.ReplyBoardVo;
 
 @Service
-public class BoardService {
+public class ReplyBoardService {
 	
 	@Autowired
-	private BoardDao bDao;
+	private ReplyBoardDao bDao;
 	
-	public List<BoardVo> getBoardList(){
+	public List<ReplyBoardVo> getBoardList(){
 		
 		return bDao.getBoardList();
 		
 	}
 	
-	public BoardVo read(int no) {
+	public ReplyBoardVo read(int no) {
 		System.out.println("service");
 		System.out.println(no);
-		BoardVo vo = bDao.read(no);
+		ReplyBoardVo vo = bDao.read(no);
 		if(vo != null) {
 			bDao.hitCount(no);
 		}
 		return vo;
 	}
 	
-	public int insert(BoardVo insertVo) {
+	public int insert(ReplyBoardVo insertVo) {
 		System.out.println("service");
 		System.out.println(insertVo);
 		return bDao.insert(insertVo);
 	}
 	
-	public BoardVo modifyRead(int no) {
+	public int reply(ReplyBoardVo replyVo) {
+		
+		bDao.replyIncrease(replyVo.getGroupNo(),replyVo.getOrderNo());
+		
+		return bDao.replyInsert(replyVo);
+	}
+	
+	public ReplyBoardVo modifyRead(int no) {
 		System.out.println("service");
 		System.out.println(no);
 		return bDao.modifyRead(no);
 	}
 
-	public int modify(BoardVo modifyVo) {
+	public int modify(ReplyBoardVo modifyVo) {
 		System.out.println("service");
 		System.out.println(modifyVo.toString());
 		return bDao.modify(modifyVo);
@@ -53,6 +60,4 @@ public class BoardService {
 		System.out.println(no);
 		return bDao.delete(no);
 	} 
-	
-
 }

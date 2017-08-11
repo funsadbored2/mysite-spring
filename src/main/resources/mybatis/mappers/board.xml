@@ -12,7 +12,7 @@
 	 <result column = "title" property = "title"/>
 	</resultMap>
 	
-	<select id = "getBoardList" resultMap= "resultMapList">
+	<select id = "getBoardList" parameterType = "int" resultMap= "resultMapList">
 	 <![CDATA[
 	 	select b.no, title, user_no, hit, rag_date, u.name
 		from  board b, USERS u

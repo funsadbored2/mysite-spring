@@ -21,7 +21,7 @@ public class GuestbookController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(Model model) {
 
-		System.out.println("lis들어옴");
+		System.out.println("list들어옴");
 		
 		List<GuestbookVo> list = gbService.list();
 		System.out.println(list.toString());
