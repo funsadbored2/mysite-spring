@@ -16,7 +16,7 @@
 		
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath}/board/search" method="post">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -53,7 +53,7 @@
 				<div class="pager">
 					<ul>
 						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
+						<li><a href="<%-- ${pageContext.request.contextPath }/board/paging?no=1 --%>">1</a></li>
 						<li><a href="">2</a></li>
 						<li class="selected">3</li>
 						<li><a href="">4</a></li>

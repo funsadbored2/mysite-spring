@@ -47,13 +47,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "insert")
-	public String insert(BoardVo insertVo){
+	public String insert(BoardVo insertVo, Model model){
 		
 		System.out.println("insert");
 		
 		bService.insert(insertVo);
 		
-		return "redirect:/board/list";
+		model.addAttribute("boardRead", insertVo);
+		
+		return "redirect:/board/read";
 	}
 
 	@RequestMapping(value = "modifyform")
@@ -88,9 +90,11 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@RequestMapping(value = "search")
+	public String search(String kwd) {
+		
+		
+		return null;
+	}
 	
-	
-	
-	
-
 }
