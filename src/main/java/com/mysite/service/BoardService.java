@@ -23,7 +23,11 @@ public class BoardService {
 	public BoardVo read(int no) {
 		System.out.println("service");
 		System.out.println(no);
-		return bDao.read(no);
+		BoardVo vo = bDao.read(no);
+		if(vo != null) {
+			bDao.hitCount(no);
+		}
+		return vo;
 	}
 	
 	public int insert(BoardVo insertVo) {

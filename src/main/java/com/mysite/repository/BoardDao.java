@@ -23,7 +23,16 @@ public class BoardDao {
 	public BoardVo read(int no) {
 		System.out.println("board");
 		System.out.println(no);
+		
 		return sqlSession.selectOne("board.getBoardOne", no);
+	}
+	
+	public int hitCount(int no) {
+		
+		System.out.println("hitcount board");
+		System.out.println(no);
+		return sqlSession.update("board.updateHitNum", no);
+
 	}
 
 	public int insert(BoardVo insertVo) {
