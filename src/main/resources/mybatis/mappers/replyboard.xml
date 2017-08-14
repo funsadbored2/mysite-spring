@@ -3,44 +3,59 @@
 <mapper namespace="replyboard">
 
 	<resultMap id="resultMapList" type="com.mysite.vo.ReplyBoardVo">
-	 <result column = "no" property = "no"/>
-	 <result column = "user_no" property = "userNo"/>
-	 <result column = "hit" property = "hitNumber"/>
-	 <result column = "reg_date" property = "date"/>
-	 <result column = "name" property = "name"/>
-	 <result column = "content" property = "content"/>
-	 <result column = "title" property = "title"/>
-	 <result column = "groupno" property = "groupNo"/>
-	 <result column = "orderno" property = "orderNo"/>
-	 <result column = "depth" property = "depth"/>
+		<result column="no" property="no" />
+		<result column="user_no" property="userNo" />
+		<result column="hit" property="hitNumber" />
+		<result column="reg_date" property="date" />
+		<result column="name" property="name" />
+		<result column="content" property="content" />
+		<result column="title" property="title" />
+		<result column="groupno" property="groupNo" />
+		<result column="orderno" property="orderNo" />
+		<result column="depth" property="depth" />
 	</resultMap>
-	
-	<select id = "getBoardList" resultMap= "resultMapList">
+
+	<select id="getBoardList" resultMap="resultMapList">
 	 <![CDATA[
-	 	select b.no, title, user_no, hit, reg_date, u.name
-		from  replyboard b, USERS u
-		where b.user_no = u.NO
-		order by groupno desc, orderno asc 
-	 ]]>
+	SELECT b.no, title, user_no, hit, reg_date, u.name, RNUM FROM 
+			(SELECT b.no, title, user_no, hit, reg_date, u.name, 
+					ROW_NUMBER() OVER(ORDER BY orderno DESC) AS RNUM
+	    			FROM replyboard b, USERS u
+	    			groupno desc)
+	    where RNUM between #{startNo} and #{endNo};
+	]]>
 	</select>
-	
-	<select id = "getBoardOne" parameterType = "int" resultMap = "resultMapList">
+	 
+	<!-- <select id="getBoardList" resultMap="resultMapList">
+	 <![CDATA[
+	 	select b.no, title, user_no, hit, reg_date, u.name, RNUM
+		from  (select b.no, title, user_no, hit, reg_date, u.name, rownum as RNUM
+				from (select b.no, title, user_no, hit, reg_date, u.name, rownum as RNUM
+						replyboard b, USERS u
+						where b.user_no = u.NO
+						order by orderno asc )
+				groupno desc)
+		where rn > #{startNo} and rn <= #{endNo}	
+	 ]]>
+	</select> -->
+
+	<select id="getBoardOne" parameterType="int" resultMap="resultMapList">
 		<![CDATA[
 			select title, content, user_no, no, groupno, orderno, depth
 			from replyboard
 			where no = #{no}
 		]]>
 	</select>
-	
-	<update id = "updateHitNum" parameterType = "int">
+
+	<update id="updateHitNum" parameterType="int">
 		<![CDATA[
 			UPDATE replyboard
 			set hit = hit + 1
 			where no = #{no}
 		]]>
 	</update>
-	
-	<insert id = "insert" parameterType = "com.mysite.vo.ReplyBoardVo">
+
+	<insert id="insert" parameterType="com.mysite.vo.ReplyBoardVo">
 		<![CDATA[
 			insert into replyboard
 			values(seq_board_no.nextval, 
@@ -55,15 +70,15 @@
 		]]>
 	</insert>
 
-	<select id = "modifyRead" parameterType = "int" resultMap = "resultMapList">
+	<select id="modifyRead" parameterType="int" resultMap="resultMapList">
 		<![CDATA[
 			select title, content, no, user_no
 			from replyboard
 			where no = #{no}
 		]]>
 	</select>
-	
-	<update id="modify" parameterType = "com.mysite.vo.ReplyBoardVo">
+
+	<update id="modify" parameterType="com.mysite.vo.ReplyBoardVo">
 	
 		<![CDATA[
 			update replyboard 
@@ -71,17 +86,17 @@
 			content = #{content}
 			where NO = #{no}
 		]]>
-	
+
 	</update>
-	
-	<delete id = "delete" parameterType = "int">
+
+	<delete id="delete" parameterType="int">
 		<![CDATA[
 			DELETE FROM replyboard
 			WHERE NO = #{no}
 		]]>
 	</delete>
-	
-	<update id ="replyIncreas" parameterType = "Map">
+
+	<update id="replyIncreas" parameterType="Map">
 		<![CDATA[
 			update replyboard
 			set orderno = orderno + 1
@@ -89,8 +104,8 @@
 			and orderno > #{orderno}
 		]]>
 	</update>
-	
-	<insert id = "replyInsert" parameterType = "com.mysite.vo.ReplyBoardVo">
+
+	<insert id="replyInsert" parameterType="com.mysite.vo.ReplyBoardVo">
 	<![CDATA[
 	 insert into replyboard
 	 		values(seq_board_no.nextval, 
@@ -104,8 +119,7 @@
 			#{depth})
 	
 	]]>
-	
+
 	</insert>
-
-
+	
 </mapper>
