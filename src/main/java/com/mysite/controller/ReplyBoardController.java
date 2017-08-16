@@ -89,6 +89,7 @@ public class ReplyBoardController {
 		System.out.println("modifyform");
 		System.out.println(no);
 		ReplyBoardVo modifyRead = bService.modifyRead(no);
+		System.out.println(modifyRead.toString());
 		
 		model.addAttribute("modifyRead", modifyRead);
 		
