@@ -36,9 +36,11 @@
 				
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath}/replyboard/list">글목록</a>
-				<c:if test = "${authUser.no == boardRead.userNo}">
-					<a href="${pageContext.request.contextPath}/replyboard/replyform?no=${boardRead.no }">답글쓰기</a>
-					<a href="${pageContext.request.contextPath}/replyboard/modifyform?no=${boardRead.no }">글수정</a>
+				<c:if test = "${!empty authUser.no}">
+					<a href="${pageContext.request.contextPath}/replyboard/replyform?no=${boardRead.no }">답글쓰기</a>				
+						<c:if test = "${authUser.no == boardRead.userNo}">
+							<a href="${pageContext.request.contextPath}/replyboard/modifyform?no=${boardRead.no }">글수정</a>
+						</c:if>
 				</c:if>
 				</div>
 			</div>

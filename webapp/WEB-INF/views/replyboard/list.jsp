@@ -32,20 +32,19 @@
 					<c:forEach items = "${boardList }" var ="vo">
 						<tr>
 							<td>${vo.no}</td>
-							<c:choose>
-							<c:when  test= "${vo.orderNo} == 1">
-							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}">-->${vo.title }	</a></td>
-							</c:when>
-							<c:when  test= "${vo.orderNo} == 2">
-							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}"><p>-->--></p>${vo.title }	</a></td>
-							</c:when>
-							<c:when  test= "${vo.orderNo} == 3">
-							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}">-->-->-->${vo.title }	</a></td>
-							</c:when>
-							<c:otherwise>
-							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}">${vo.title }	</a></td>
-							</c:otherwise>
-							</c:choose>
+
+							<td style="text-align: left">
+								<a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}">
+									<c:if test="${!empty vo.depth and vo.depth ne 0}">
+										<c:forEach begin="1" end="${vo.depth}">
+										&nbsp;
+										</c:forEach>
+										<img src="${pageContext.request.contextPath}/webapp/assets/images/reply.jpg" />
+									</c:if>	
+										${vo.title }
+								</a>
+							</td>
+				
 							<td>${vo.name }</td>
 							<td>${vo.hitNumber }</td>
 							<td>${vo.date }</td>
@@ -65,15 +64,15 @@
 				   
 				<%-- <div class="pager">
 					<ul>
-						<c:if test = "${paging.prev }">
-						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${paging.start - 1 }">◀</a></li>
-						</c:if>
-						<c:forEach begin = "${paging.start }" end = "${paging.end }" var="index">
+						
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${prevPageNo}">◀</a></li>
+		
+						<c:forEach begin = "${startPageNo }" end = "${endPageNo }" var="index">
 						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${index}">${index}</a></li>
 						</c:forEach>
-						<c:if test = "${paging.next }">
-						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${paging.end + 1}">▶</a></li>
-						</c:if>
+			
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${nextPageNo}">▶</a></li>
+					
 					</ul>
 				</div>		 --%>
 						

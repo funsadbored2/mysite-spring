@@ -23,6 +23,7 @@ public class ReplyBoardController {
 		
 		List<ReplyBoardVo> list = bService.getBoardList();
 		System.out.println(list);
+		
 		model.addAttribute("boardList", list);
 		
 		return "replyboard/list";

@@ -14,17 +14,26 @@
 		<result column="orderno" property="orderNo" />
 		<result column="depth" property="depth" />
 	</resultMap>
-
+	
 	<select id="getBoardList" resultMap="resultMapList">
+		 <![CDATA[
+		select b.no, title, user_no, hit, reg_date, u.name, depth
+		from  replyboard b, USERS u
+		where b.user_no = u.NO
+		order by groupno desc, orderno asc
+	    ]]>
+	</select>
+	
+<!-- 	<select id="getBoardList" resultMap="resultMapList">
 	 <![CDATA[
-	SELECT b.no, title, user_no, hit, reg_date, u.name, RNUM FROM 
+		SELECT b.no, title, user_no, hit, reg_date, u.name, RNUM FROM 
 			(SELECT b.no, title, user_no, hit, reg_date, u.name, 
 					ROW_NUMBER() OVER(ORDER BY orderno DESC) AS RNUM
 	    			FROM replyboard b, USERS u
-	    			groupno desc)
+	    			ORDERBY groupno desc)
 	    where RNUM between #{startNo} and #{endNo};
 	]]>
-	</select>
+	</select> -->
 	 
 	<!-- <select id="getBoardList" resultMap="resultMapList">
 	 <![CDATA[
@@ -90,10 +99,12 @@
 	</update>
 
 	<delete id="delete" parameterType="int">
+		<c:if test = "groupno">
+		</c:if>
 		<![CDATA[
-			DELETE FROM replyboard
-			WHERE NO = #{no}
-		]]>
+			DELETE FROM replyboard		
+			WHERE NO = #{no}]]>
+
 	</delete>
 
 	<update id="replyIncreas" parameterType="Map">
