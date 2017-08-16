@@ -15,25 +15,53 @@
 		<result column="depth" property="depth" />
 	</resultMap>
 	
-	<select id="getBoardList" resultMap="resultMapList">
-		 <![CDATA[
-		select b.no, title, user_no, hit, reg_date, u.name, depth, groupno, orderno
-		from  replyboard b, USERS u
-		where b.user_no = u.NO
-		order by groupno desc, orderno asc
-	    ]]>
+	<select id ="totalCount" resultType = "int">
+		<![CDATA[
+			select
+			 count(*)
+			from replyBoard
+		]]>
 	</select>
 	
-<!-- 	<select id="getBoardList" resultMap="resultMapList">
-	 <![CDATA[
-		SELECT b.no, title, user_no, hit, reg_date, u.name, RNUM FROM 
-			(SELECT b.no, title, user_no, hit, reg_date, u.name, 
-					ROW_NUMBER() OVER(ORDER BY orderno DESC) AS RNUM
-	    			FROM replyboard b, USERS u
-	    			ORDERBY groupno desc)
-	    where RNUM between #{startNo} and #{endNo};
-	]]>
+	<!-- <select id="getBoardList" parameterType = "String" resultMap="resultMapList">
+		<if test = "kwd == null">
+			<![CDATA[
+				select b.no, title, user_no, hit, reg_date, u.name, depth, groupno, orderno
+				from  replyboard b, USERS u
+				where b.user_no = u.NO
+				order by groupno desc, orderno asc
+		    ]]>
+	    </if>
+	    <if test = "kwd != null">
+			select  b.no, title, user_no, hit, reg_date, u.name, depth, groupno, orderno
+			from  replyboard b, USERS u
+			where 
+	    </if>
 	</select> -->
+	
+	
+	
+	<select id="getBoardList" parameterType = "int" resultMap="resultMapList">
+	<!-- <if test = "kwd == null"> -->
+	 <![CDATA[
+	select x.rnum, x.no, x.title, x.user_no, x.hit, x.reg_date, x.name 
+        from(
+            select rownum as rnum, a.no, a.title, a.user_no, a.hit, a.reg_date, a.name 
+                from(
+                select b.no, title, user_no, hit, reg_date, u.name
+                from replyboard b, USERS u
+                where b.user_no = u.NO
+                order by groupno desc, orderno asc)a
+            where rownum <= #{pageSize})x
+        where x.rnum >= 1
+	]]>
+	<!-- </if> -->
+	<!--  <if test = "kwd != null">
+	  <![CDATA[ select  b.no, title, user_no, hit, reg_date, u.name, depth, groupno, orderno
+			from  replyboard b, USERS u
+			where ]]>
+	    </if> -->
+	</select>
 	 
 	<!-- <select id="getBoardList" resultMap="resultMapList">
 	 <![CDATA[

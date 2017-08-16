@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysite.service.ReplyBoardService;
+import com.mysite.vo.Paging;
 import com.mysite.vo.ReplyBoardVo;
 
 
@@ -20,14 +22,28 @@ public class ReplyBoardController {
 	private ReplyBoardService bService;
 	
 	@RequestMapping(value = "list")
-	public String list(Model model){
+	public String list(@RequestParam(value = "pageNo", defaultValue = "0") int pageNo, 
+						Model model){
 		
-		List<ReplyBoardVo> list = bService.getBoardList();
+	/*	String kwd = null;*/
+		Paging paging = new Paging(pageNo,3);
+		paging.setTotalCount(bService.searchTotalCount());
+		
+		List<ReplyBoardVo> list = bService.getBoardList(paging.getPageSize());
 		System.out.println(list);
 		
 		model.addAttribute("boardList", list);
+		model.addAttribute("paging", paging);
 		
 		return "replyboard/list";
+	}
+	
+	@RequestMapping(value = "search")
+	public String search(String kwd,Model model){
+		System.out.println("search들어옴");
+		System.out.println("kwd");
+		
+		return  "redirect:/replyboard/list";
 	}
 	
 	@RequestMapping(value = "read")

@@ -15,11 +15,25 @@ public class ReplyBoardDao {
 	@Autowired
 	private SqlSession sql;
 	
-	public List<ReplyBoardVo> getBoardList(){
-		List<ReplyBoardVo> list = sql.selectList("replyboard.getBoardList");
+	public List<ReplyBoardVo> getBoardList(int pageSize){
+		
+		
+		List<ReplyBoardVo> list = sql.selectList("replyboard.getBoardList",pageSize);
 		
 		return list;
 		
+	}
+	
+	public int searchTotalCount() {
+		
+		int count = sql.selectOne("replyboard.totalCount");
+		return count;
+				
+	}
+	
+	public List<ReplyBoardVo> search(String kwd){
+		
+		return sql.selectList("replyboard.search", kwd);
 	}
 	
 	public ReplyBoardVo read(int no) {

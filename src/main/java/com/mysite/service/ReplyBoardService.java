@@ -14,11 +14,18 @@ public class ReplyBoardService {
 	@Autowired
 	private ReplyBoardDao bDao;
 	
-	public List<ReplyBoardVo> getBoardList(){
+	public List<ReplyBoardVo> getBoardList(int pageSize){
 		
-		return bDao.getBoardList();
+		return bDao.getBoardList(pageSize);
 		
 	}
+	
+	public int searchTotalCount() {
+	
+		return bDao.searchTotalCount();
+		
+	}
+	
 	
 	public ReplyBoardVo read(int no) {
 		System.out.println("service");

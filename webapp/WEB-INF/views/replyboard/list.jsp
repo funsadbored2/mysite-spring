@@ -29,6 +29,7 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>				
+				
 					<c:forEach items = "${boardList }" var ="vo">
 						<tr>
 							<td>${vo.no}</td>
@@ -41,7 +42,6 @@
 										&nbsp;&nbsp;
 										</c:forEach>
 										->
-										
 									</c:if>	
 										${vo.title }
 								</a>
@@ -63,20 +63,22 @@
 						</tr>
 					</c:forEach>
 				</table>
+	
+
 				   
-				<%-- <div class="pager">
+				<div class="pager">
 					<ul>
 						
-						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${prevPageNo}">◀</a></li>
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${paging.prevPageNo}">◀</a></li>
 		
-						<c:forEach begin = "${startPageNo }" end = "${endPageNo }" var="index">
-						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${index}">${index}</a></li>
-						</c:forEach>
+							<c:forEach begin = "${paging.startPageNo }" end = "${paging.endPageNo }" var="index">
+								<li><a href="${pageContext.request.contextPath }/replyboard/list?pageNo=${index}">${index}</a></li>
+							</c:forEach>
 			
-						<li><a href="${pageContext.request.contextPath }/replyboard/list?page=${nextPageNo}">▶</a></li>
+						<li><a href="${pageContext.request.contextPath }/replyboard/list?pageNo=${paging.nextPageNo}">▶</a></li>
 					
 					</ul>
-				</div>		 --%>
+				</div>		
 						
 				<div class="bottom">
 				<c:if test = "${authUser != null}">
