@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysite.service.ReplyBoardService;
 import com.mysite.vo.ReplyBoardVo;
@@ -104,12 +105,11 @@ public class ReplyBoardController {
 		return "redirect:/replyboard/list";
 	}
 
-	@RequestMapping(value = "delete")
-	public String delete(int no){
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(ReplyBoardVo deleteVo){
 		
 		System.out.println("delete");
-		System.out.println(no);
-		bService.delete(no);
+		bService.delete(deleteVo);
 		
 		return "redirect:/replyboard/list";
 	}

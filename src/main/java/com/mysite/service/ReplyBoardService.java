@@ -55,9 +55,9 @@ public class ReplyBoardService {
 		return bDao.modify(modifyVo);
 	}
 
-	public int delete(int no) {
+	public int delete(ReplyBoardVo deleteVo) {
 		System.out.println("service");
-		System.out.println(no);
-		return bDao.delete(no);
+		System.out.println(deleteVo.toString());
+		return bDao.delete(deleteVo);
 	} 
 }

@@ -17,7 +17,7 @@
 	
 	<select id="getBoardList" resultMap="resultMapList">
 		 <![CDATA[
-		select b.no, title, user_no, hit, reg_date, u.name, depth
+		select b.no, title, user_no, hit, reg_date, u.name, depth, groupno, orderno
 		from  replyboard b, USERS u
 		where b.user_no = u.NO
 		order by groupno desc, orderno asc
@@ -98,12 +98,20 @@
 
 	</update>
 
-	<delete id="delete" parameterType="int">
-		<c:if test = "groupno">
-		</c:if>
+	<delete id="delete" parameterType="com.mysite.vo.ReplyBoardVo">
+		
 		<![CDATA[
-			DELETE FROM replyboard		
-			WHERE NO = #{no}]]>
+				DELETE FROM replyboard ]]>		
+		<if test = "orderNo == 1">
+			<![CDATA[
+				WHERE groupno = #{groupNo}
+			]]>
+		</if>
+		<if test = "orderNo > 1">
+		<![CDATA[
+			WHERE no = #{no}
+		]]>
+		</if>
 
 	</delete>
 

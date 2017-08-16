@@ -36,10 +36,12 @@
 							<td style="text-align: left">
 								<a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}">
 									<c:if test="${!empty vo.depth and vo.depth ne 0}">
+										
 										<c:forEach begin="1" end="${vo.depth}">
-										&nbsp;
+										&nbsp;&nbsp;
 										</c:forEach>
-										<img src="${pageContext.request.contextPath}/webapp/assets/images/reply.jpg" />
+										->
+										
 									</c:if>	
 										${vo.title }
 								</a>
@@ -54,7 +56,7 @@
 			 					</c:when>
 			 					<c:otherwise>
 			 					<c:if test ="${authUser.no == vo.userNo}">
-									<td><a href="${pageContext.request.contextPath}/replyboard/delete?no=${vo.no}" class="del">삭제</a></td>
+									<td><a href="${pageContext.request.contextPath}/replyboard/delete?no=${vo.no}&orderNo=${vo.orderNo}&groupNo=${vo.groupNo}" class="del">삭제</a></td>
 								</c:if>
 								</c:otherwise>
 							</c:choose>

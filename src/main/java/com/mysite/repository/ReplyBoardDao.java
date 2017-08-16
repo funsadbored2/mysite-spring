@@ -17,7 +17,7 @@ public class ReplyBoardDao {
 	
 	public List<ReplyBoardVo> getBoardList(){
 		List<ReplyBoardVo> list = sql.selectList("replyboard.getBoardList");
-		System.out.println(list);
+		
 		return list;
 		
 	}
@@ -55,10 +55,10 @@ public class ReplyBoardDao {
 		return sql.update("replyboard.modify", modifyVo);
 	}
 
-	public int delete(int no) {
+	public int delete(ReplyBoardVo deleteVo) {
 		System.out.println("board");
-		System.out.println(no);
-		return sql.delete("replyboard.delete", no);
+		System.out.println(deleteVo);
+		return sql.delete("replyboard.delete", deleteVo);
 	}
 	
 	public int replyIncrease(int groupno, int orderno) {
