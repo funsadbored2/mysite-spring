@@ -29,7 +29,7 @@ public class ReplyBoardController {
 		Paging paging = new Paging(pageNo,3);
 		paging.setTotalCount(bService.searchTotalCount());
 		
-		List<ReplyBoardVo> list = bService.getBoardList(paging.getPageSize());
+		List<ReplyBoardVo> list = bService.getBoardList(paging);
 		System.out.println(list);
 		
 		model.addAttribute("boardList", list);

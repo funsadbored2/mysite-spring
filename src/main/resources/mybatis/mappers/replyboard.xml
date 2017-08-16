@@ -41,7 +41,7 @@
 	
 	
 	
-	<select id="getBoardList" parameterType = "int" resultMap="resultMapList">
+	<select id="getBoardList" parameterType = "com.mysite.vo.Paging" resultMap="resultMapList">
 	<!-- <if test = "kwd == null"> -->
 	 <![CDATA[
 	select x.rnum, x.no, x.title, x.user_no, x.hit, x.reg_date, x.name 
@@ -52,8 +52,9 @@
                 from replyboard b, USERS u
                 where b.user_no = u.NO
                 order by groupno desc, orderno asc)a
-            where rownum <= #{pageSize})x
-        where x.rnum >= 1
+            where rownum <= #{totalCount})x
+        where x.rnum >= #{startNo}
+        and 
 	]]>
 	<!-- </if> -->
 	<!--  <if test = "kwd != null">

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mysite.vo.Paging;
 import com.mysite.vo.ReplyBoardVo;
 @Repository
 public class ReplyBoardDao {
@@ -15,10 +16,10 @@ public class ReplyBoardDao {
 	@Autowired
 	private SqlSession sql;
 	
-	public List<ReplyBoardVo> getBoardList(int pageSize){
+	public List<ReplyBoardVo> getBoardList(Paging paging){
 		
 		
-		List<ReplyBoardVo> list = sql.selectList("replyboard.getBoardList",pageSize);
+		List<ReplyBoardVo> list = sql.selectList("replyboard.getBoardList",paging);
 		
 		return list;
 		

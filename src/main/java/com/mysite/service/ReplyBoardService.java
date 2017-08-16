@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mysite.repository.ReplyBoardDao;
+import com.mysite.vo.Paging;
 import com.mysite.vo.ReplyBoardVo;
 
 @Service
@@ -14,9 +15,9 @@ public class ReplyBoardService {
 	@Autowired
 	private ReplyBoardDao bDao;
 	
-	public List<ReplyBoardVo> getBoardList(int pageSize){
+	public List<ReplyBoardVo> getBoardList(Paging paging){
 		
-		return bDao.getBoardList(pageSize);
+		return bDao.getBoardList(paging);
 		
 	}
 	
