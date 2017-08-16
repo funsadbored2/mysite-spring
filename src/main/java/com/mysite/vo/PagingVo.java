@@ -136,6 +136,4 @@ public class PagingVo {
 				+ nextPageNo + ", finalPageNo=" + finalPageNo + ", totalCount=" + totalCount + "]";
 	}
 
-
-x
 }
