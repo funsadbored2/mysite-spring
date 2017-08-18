@@ -3,6 +3,7 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/main">여윤철</a></li>
 		<li><a href="${pageContext.request.contextPath}/guestbook/list">방명록</a></li>
+		<li><a href="${pageContext.request.contextPath}/guestbook/list-ajax">ajax방명록</a></li>
 		<li><a href="${pageContext.request.contextPath}/board/list">게시판</a></li>
 		<li><a href="${pageContext.request.contextPath}/replyboard/list">계층형게시판</a></li>
 	</ul>

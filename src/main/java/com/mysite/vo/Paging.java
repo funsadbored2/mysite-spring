@@ -1,7 +1,7 @@
 package com.mysite.vo;
 
 public class Paging {
-	private int pageSize; // 게시 글 수
+	private int pageSize; // 한 페이지 내에 있는 게시 글 수
     private int firstPageNo; // 첫 번째 페이지 번호
     private int prevPageNo; // 이전 페이지 번호
     private int startPageNo; // 시작 페이지 (페이징 네비 기준)
@@ -10,6 +10,8 @@ public class Paging {
     private int nextPageNo; // 다음 페이지 번호
     private int finalPageNo; // 마지막 페이지 번호
     private int totalCount; // 게시 글 전체 수
+    private int startRecord;
+    private int endRecord;
 
     public Paging() {
     	
@@ -27,15 +29,32 @@ public class Paging {
     public int getPageSize() {
         return pageSize;
     }
-
+    
     /**
      * @param pageSize the pageSize to set
      */
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+    
+    
+    public int getStartRecord() {
+		return startRecord;
+	}
 
-    /**
+	public void setStartRecord(int startRecord) {
+		this.startRecord = startRecord;
+	}
+
+	public int getEndRecord() {
+		return endRecord;
+	}
+
+	public void setEndRecord(int endRecord) {
+		this.endRecord = endRecord;
+	}
+
+	/**
      * @return the firstPageNo
      */
     public int getFirstPageNo() {
@@ -166,7 +185,14 @@ public class Paging {
 
         int startPage = ((pageNo - 1) / 10) * 10 + 1; // 시작 페이지 (페이징 네비 기준)
         int endPage = startPage + 10 - 1; // 끝 페이지 (페이징 네비 기준)
+        
+        int startno = (pageNo - 1) * pageSize + 1;
+        int endrecord = (pageNo + 1) - 1;
+        
+        this.setStartRecord(startno);
+        this.setEndRecord(endrecord);
 
+        	
         if (endPage > finalPage) { // [마지막 페이지 (페이징 네비 기준) > 마지막 페이지] 보다 큰 경우
             endPage = finalPage;
         }
@@ -189,6 +215,7 @@ public class Paging {
         }
 
         this.setFinalPageNo(finalPage); // 마지막 페이지 번호
+
     }
 
 	@Override

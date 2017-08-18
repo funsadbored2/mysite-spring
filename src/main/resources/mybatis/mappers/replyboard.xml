@@ -52,9 +52,8 @@
                 from replyboard b, USERS u
                 where b.user_no = u.NO
                 order by groupno desc, orderno asc)a
-            where rownum <= #{totalCount})x
-        where x.rnum >= #{startNo}
-        and 
+            where rnum between 1 and #{totalCount})x
+        and x.rnum between #{startRecord} and #{endRecord}
 	]]>
 	<!-- </if> -->
 	<!--  <if test = "kwd != null">
