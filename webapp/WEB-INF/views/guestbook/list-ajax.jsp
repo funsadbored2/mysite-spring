@@ -87,8 +87,8 @@
 			//data : {name: ”홍길동"},
 
 			//dataType : "json",
-			success : function(result){
-				alert(result);
+			success : function(gbList){
+				console.log(gbList);
 				/*성공시 처리해야될 코드 작성*/
 			
 			},
