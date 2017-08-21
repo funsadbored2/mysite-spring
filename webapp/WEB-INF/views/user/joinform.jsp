@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 	<title>Insert title here</title>
 </head>
 <body>
@@ -26,7 +27,8 @@
 	
 						<label class="block-label" for="email">이메일</label>
 						<input id="email" name="email" type="text" value=""/>
-						<input type="button" value="id 중복체크" >
+						<input id = "emailbtn" type="button" value="id 중복체크" >
+						<p style="color:red" id = "validation"></p>
 						
 						<label class="block-label">패스워드</label>
 						<input name="password" type="password" value=""/>
@@ -56,4 +58,49 @@
 	</div> <!-- /container -->
 
 </body>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+	
+	$("#emailbtn").on("click",function(){
+		event.preventDefault();
+		console.log("들어옴");
+		var emailValidation = {
+				email : $("[name = email]").val()
+				}
+
+		$.ajax({
+
+			url : "${pageContext.request.contextPath}/user/emailcheck",
+			type : "post",
+			/* contentType : "application/json", */
+			data : emailValidation,
+
+			dataType : "json", 
+			success : function(check){
+					
+					console.log(check);
+					
+					if(check == true){
+						validate("이메일을 사용하실 수 있습니다.");
+					}
+					else if(check == false){
+						validate("이 이메일은 사용중입니다.");
+					}
+				},	
+			
+				error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+				}
+			});
+	
+		});
+		
+	});
+	
+	function validate(str) {
+		$("#validation").text(str);
+	}
+
+</script>
 </html>

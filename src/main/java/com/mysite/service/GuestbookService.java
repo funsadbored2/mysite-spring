@@ -23,10 +23,19 @@ public class GuestbookService {
 	public int add(GuestbookVo vo) {
 		
 		System.out.println(vo.toString());
-
+		
 		return gbDao.add(vo);
 
 	}
+	
+	public GuestbookVo addNo(GuestbookVo vo) {
+		int no = gbDao.addNo(vo);
+		vo = gbDao.selectByNo(no);
+		return vo;
+	
+	} 
+	
+	
 
 	public int delete(int no, String pass) {
 		

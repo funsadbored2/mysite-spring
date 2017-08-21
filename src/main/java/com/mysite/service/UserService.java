@@ -36,4 +36,19 @@ public class UserService {
 		
 	}
 	
+	public Boolean emailValidation(String email) {
+		System.out.println(email + "유저 서지스 들어옴");
+		UserVo checkVo = userDao.emailValidation(email);
+		
+		boolean validation = true;
+		
+		if(checkVo == null) {
+			validation = true;
+		}else if(checkVo != null) {
+			validation = false;
+		}
+		
+		return validation;
+	}
+	
 }

@@ -24,6 +24,35 @@
 
 	</select>
 
+	<insert id="addNo" parameterType="com.mysite.vo.GuestbookVo">
+	<selectKey keyProperty = "no" resultType="int" order ="BEFORE">
+		select SQL_GUESTBOOK_NO.nextval from dual
+	</selectKey>
+	<![CDATA[
+
+		insert into Guestbook
+		values(#{no},
+			   #{name},
+			   #{password},
+			   #{content},
+			   sysdate
+
+	)]]>
+	</insert>
+	
+	<select id = "selectByNo" parameterType="int" resultMap="resultMapList" >
+		<![CDATA[
+			select 
+			no,
+			name,
+			content,
+			reg_date 
+			from guestbook
+			where no = #{no}
+		]]>
+	
+	</select>
+
 	<insert id="add" parameterType="com.mysite.vo.GuestbookVo">
 	
 	<![CDATA[

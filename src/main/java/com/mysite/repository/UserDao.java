@@ -42,4 +42,9 @@ public class UserDao {
 		return sqlSession.update("user.update", userVo);
 	
 	}
+	
+	public UserVo emailValidation(String email) { 
+			System.out.println("이메일 다오 입성" + email);
+		return sqlSession.selectOne("user.selectUserByEmail", email);
+	}
 }

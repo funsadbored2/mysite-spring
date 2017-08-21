@@ -40,4 +40,16 @@ public class GuestbookDao {
 			return sqlSession.delete("guestbook.delete", map);
 		}
 
+		public int addNo(GuestbookVo vo){
+			
+			sqlSession.insert("guestbook.addNo",vo);
+			
+			return vo.getNo();
+		}
+		
+		public GuestbookVo selectByNo(int no) {
+			
+			return sqlSession.selectOne("guestbook.selectByNo", no);
+			
+		}
 }
