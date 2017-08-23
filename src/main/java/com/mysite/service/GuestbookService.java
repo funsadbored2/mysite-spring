@@ -34,12 +34,14 @@ public class GuestbookService {
 		return vo;
 	
 	} 
-	
-	
 
-	public int delete(int no, String pass) {
+	public List<GuestbookVo> delete(int no, String pass) {
 		
-		return gbDao.delete(no, pass);
+		System.out.println("delete service");
+		gbDao.delete(no, pass);
+		
+		return gbDao.list();
+				
 	
 	}
 

@@ -32,6 +32,7 @@ public class GuestbookDao {
 		}
 		
 		public int delete(int no, String pass) {
+			System.out.println("delete dao");
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("no", no);

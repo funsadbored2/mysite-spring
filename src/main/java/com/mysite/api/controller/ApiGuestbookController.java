@@ -39,6 +39,17 @@ public class ApiGuestbookController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "delete" , method = RequestMethod.POST)
+	public List<GuestbookVo> delete(@RequestBody GuestbookVo guestbookVo){
+		
+		System.out.println(guestbookVo.getNo() + guestbookVo.getPassword());
+		
+		List<GuestbookVo> list = gbService.delete(guestbookVo.getNo(), guestbookVo.getPassword());
+		
+		return list;
+	}
+	
 	
 	
 }
